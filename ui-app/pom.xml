@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>nuwan.dropwizard.sample</groupId>
   <artifactId>ui-app</artifactId>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>ui-app Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -53,6 +53,27 @@
 					</environmentVariables>
 				</configuration>
 			</plugin>
+	<plugin>
+          	 <artifactId>maven-antrun-plugin</artifactId>
+           		<executions>
+            		 <execution>
+              		 <phase>test</phase>
+               			<goals>
+                 		<goal>run</goal>
+               			</goals>
+               		<configuration>
+                 		<tasks>
+					<delete>
+			                    <fileset dir="${basedir}/../server-app/src/main/resources/assets" includes="*.*" />
+			                </delete>
+ <copy todir="${basedir}/../server-app/src/main/resources/assets">
+          <fileset dir="dist" includes="**/*" />
+         </copy>
+                		 </tasks>
+	               </configuration>
+             </execution>
+           </executions>
+         </plugin>
 		</plugins>
 	</build>
 </project>
